@@ -1,0 +1,12 @@
+br\com\abneri\dao\TaskDao.class
+br\com\abneri\dao\impl\TaskDaoImpl.class
+br\com\abneri\domain\TaskList.class
+br\com\abneri\service\impl\TaskListServiceImpl.class
+br\com\abneri\TaskListApplication.class
+br\com\abneri\dao\impl\TaskListDaoImpl.class
+br\com\abneri\service\TaskService.class
+br\com\abneri\config\ConfigurationSpringMVC.class
+br\com\abneri\dao\TaskListDao.class
+br\com\abneri\domain\Task.class
+br\com\abneri\service\TaskListService.class
+br\com\abneri\service\impl\TaskServiceImpl.class

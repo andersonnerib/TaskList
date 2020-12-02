@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Task List</title>
+
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width,
+     user-scalable=no" />
+
+<link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Task List</h1>
+		</div>
+
+		<div>
+			<a class="btn btn-primary" th:href="@{/tasklist/add}">New Task
+				List</a>
+		</div>
+		<hr />
+
+		<div th:if="${tasklists != null}">
+			<h4>Task Lists</h4>
+
+			<div th:if="${message != null}">
+				<div class="alert alert-info" role="alert">
+					<span th:text="${message}">"message"</span>
+				</div>
+			</div>
+				
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tr th:each="tasklist : ${tasklists}">
+					<td>							  
+						<a th:text="${tasklist.name}" th:href="@{/tasklist/{tasklistId}/task/list(tasklistId=${tasklist.id})}">name</a>
+					</td>
+					<td 
+						th:text="${tasklist.description}">description
+					</td>
+					<td>
+						<a class="btn btn-sm btn-info" th:href="@{/tasklist/{id}/update(id=${tasklist.id})}">Edit</a> 
+						<a class="btn btn-sm btn-danger" th:href="@{/tasklist/{id}/delete(id=${tasklist.id})}">Delete</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div th:if="${#lists.isEmpty(tasklists)}">
+			<div class="alert alert-info" role="alert">
+				<span class="glyphicon glyphicon-exclamation-sign"></span> Empty
+				list.
+			</div>
+		</div>
+		<hr />
+
+		<a class="btn btn-light" href="/home">Back</a>
+		<hr />
+
+		<footer class="footer">
+			<p>© Anderson Neri</p>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Task List</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+<link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Task List</h1>
+		</div>
+
+		<div>
+			<a class="btn btn-primary" th:href="@{/tasklist/{tasklistId}/task/add(tasklistId=${tasklistId})}">New Task</a>
+		</div>
+
+		<hr />
+		<div th:if="${tasks != null}">
+			<h4>Tasks</h4>
+
+			<div th:if="${message != null}">
+				<div class="alert alert-info" role="alert">
+					<span th:text="${message == null ? '&nbsp;' : message}">message</span>
+				</div>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Concluded?</th>
+					</tr>
+				</thead>
+				<tr th:each="task : ${tasks}">
+					<td th:text="${task.title}">title</td>
+					<td th:text="${task.description}">description</td>
+					<td th:text="${task.concluded == 'Y' ? 'Yes' : 'No'}">concluded</td>
+					<td>
+						<a class="btn btn-sm btn-info" th:href="@{/tasklist/{tasklistId}/task/{taskId}/update(tasklistId=${tasklistId},taskId=${task.id})}">Edit</a>
+						<a class="btn btn-sm btn-danger" th:href="@{/tasklist/{tasklistId}/task/{taskId}/delete(tasklistId=${tasklistId}, taskId=${task.id})}">Delete</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div th:if="${#lists.isEmpty(tasks)}">
+			<div class="alert alert-info" role="alert">
+				<span class="glyphicon glyphicon-exclamation-sign"></span> 
+				Empty task list.
+			</div>
+		</div>
+
+		<hr />
+		<a class="btn btn-light" th:href="@{/tasklist/list}">Back</a>
+
+		<hr />
+		<footer class="footer">
+			<p>&copy; Anderson Neri</p>
+		</footer>
+
+	</div>
+</body>
+</html>
